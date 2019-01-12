@@ -1,3 +1,16 @@
 <p>
   {{hero.id}}{{hero.name}}
 </p>
+앵귤러에선 ngModel 을 디렉티브
+
+<div>
+  <label>name:
+    <input [(ngModel)]="hero.name" placeholder="name">
+  </label>
+</div>
+
+<div>
+  <div [class.special]="isSpecial">class binding button</div>
+</div>
+
+
