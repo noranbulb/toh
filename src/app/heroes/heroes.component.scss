@@ -1,1 +1,19 @@
 .special {background-color: #f00;}
+
+li {
+  .bg-light {
+    background-color: #cccccc !important;
+  }
+  &.selected {
+    div {
+      &.bg-light {
+        background-color: #600 !important;
+      }
+      &.text-dark {
+        color: white !important;
+      }
+    }
+  }
+}
+
+
