@@ -88,6 +88,8 @@ export class HeroesComponent implements OnInit
         this.heroes = data;
       });
 
+
+
   }
 
   ngOnInit() {
