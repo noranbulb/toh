@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Hero} from '../hero';
 import {HEROES} from '../mock-heroes';
 import {HeroService} from '../hero.service';
+import {element} from 'protractor';
 
 
 @Component({
@@ -84,9 +85,20 @@ export class HeroesComponent implements OnInit
     //const heroService = new HeroService();
     //this.heroes = heroService.getHeroes();
 
-    heroService.getHeroes().subscribe(data => { //subscribe 는 Observable로 가입한다는 뜻
+    heroService.getHeroes()
+      .subscribe(data => { //subscribe 는 Observable로 가입한다는 뜻
         this.heroes = data;
       });
+
+    //1) 가입 자식 컴포넌트가 변경되었다는것을 알기 위해서 subscripbe
+    this.heroService.refresh$
+      .subscribe(data=> {
+        console.log(data)
+        if( this.heroes )
+        {
+          this.selectedHero =  this.heroes.find(item => item.id === data )
+        }
+      })
 
 
 

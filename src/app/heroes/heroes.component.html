@@ -13,18 +13,20 @@
 
 <!--<app-hero-detail [hero]="selectedHero"></app-hero-detail>-->
 
-
+<div class="mb-3">
+  <router-outlet></router-outlet>
+</div>
 
 <ul>
   <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero"
       class="d-flex m-1"
-      routerLink="/detail/{{hero.id}}">
+      routerLink="/heroes/{{hero.id}}">
     <span class="rounded-left p-2 bg-primary text-light">{{hero.id}}</span>
     <div class="rounded-right p-2 bg-light text-dark w-50">{{hero.name}}</div>
   </li>
 </ul>
 
-<app-hero-detail [hero]="selectedHero"></app-hero-detail>
+<!--<app-hero-detail [hero]="selectedHero"></app-hero-detail>-->
 
 <!--<div>
   <label>name:

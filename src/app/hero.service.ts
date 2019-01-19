@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HEROES} from './mock-heroes';
-import {Observable, of} from 'rxjs';
+import {Observable, of, Subject} from 'rxjs';
 
 import {delay} from 'rxjs/operators';
 import {Hero} from './hero';
@@ -11,6 +11,13 @@ import {element} from 'protractor';
   providedIn: 'root'
 })
 export class HeroService {
+
+  refresh = new Subject<number>(); // publisher: next(11) 함수로 데이터 발생
+
+  refresh$ = this.refresh.asObservable(); // subscriber: subscribe()로 데이터 수신
+
+
+
 
   constructor() { }
 
@@ -25,8 +32,16 @@ export class HeroService {
     return of(HEROES).pipe(delay(400)); //네트워크 시뮬레이션처럼 할수 있다.
   }
 
-  getHero(hero_id:number):Hero
-  {
-    HEROES.find(element => element.id === hero_id)
+  // getHero(hero_id:number):Hero
+  // {
+  //   HEROES.find(element => element.id === hero_id)
+  // }
+
+  // getHero(hero_id: number): Hero {
+  //   return HEROES.find(element => element.id === hero_id);
+  // }
+
+  getHero(hero_id: number): Observable<Hero> {
+    return of( HEROES.find(element => element.id === hero_id) ).pipe(delay(400)); //네트워크 시뮬레이션처럼 할수 있다.
   }
 }
