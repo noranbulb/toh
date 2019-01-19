@@ -72,6 +72,10 @@ console.log(index);
 console.log('11 -----------------------------------------------');
 var sum = 0;
 
+books.forEach(item => sum += item.price)
+
+let item = function
+
 console.log('sum:' + sum);
 
 // 12. 가격이 3만원이상인것을 모아서 별도의 배열을 만드시오

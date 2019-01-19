@@ -12,10 +12,20 @@ let b = function()
 }
 
 
-let circle = (pi,r) => pi * r * r;
+let circle = function(pi,r)   pi * r * r;
 
 
-console.log( circle(3.14 , 1) );
+console.log( circle(3.14 , 5) )
+
+//위에 문장을 애로우 평션으로 바꾸세요
+//익명 함수를 애로우 펑션으로 바꿀수 있다. : 입력 = > 출력
+
+
+
+let circle2 = (pi,r) => pi * r * r;
+
+
+console.log( circle2(3.14 , 1) );
 
 //위에 문장을 애로우 평션으로 바꾸세요..
 //익명 함수를 애로우 펑션으로 바꿀수 있다. : 입력 => 출력
