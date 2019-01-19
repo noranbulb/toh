@@ -3,6 +3,7 @@ import {Hero} from '../hero';
 import {HEROES} from '../mock-heroes';
 import {HeroService} from '../hero.service';
 import {element} from 'protractor';
+import {NavigationEnd, Router} from '@angular/router';
 
 
 @Component({
@@ -12,11 +13,11 @@ import {element} from 'protractor';
 })
 export class HeroesComponent implements OnInit
 {
-  
+
   //1)리터럴 객체로 객체 생성
 
   // hero:Hero = {
-  //   id : 11,
+  //   hero_id : 11,
   //   name : 'win'
   // }
 
@@ -73,7 +74,7 @@ export class HeroesComponent implements OnInit
   // }
 
   //생성자로 이미 등록된 서비스를 주입받는다. (DI)
-  constructor(private heroService : HeroService)
+  constructor(private heroService : HeroService , private router:Router )
   {
     //2 ) new 키워드로 객체 생성11
     this.hero = new Hero(1,'a');
@@ -96,9 +97,38 @@ export class HeroesComponent implements OnInit
         console.log(data)
         if( this.heroes )
         {
-          this.selectedHero =  this.heroes.find(item => item.id === data )
+          this.selectedHero =  this.heroes.find(item => item.hero_id === data )
         }
-      })
+      });
+
+    //라우트 이벤트
+    // this.router.events.subscribe(events => {
+    //   if (events instanceof NavigationEnd) {
+    //
+    //     if (events.url === '/heroes') {
+    //       this.selectedHero = null;
+    //     }
+    //   }
+    // });
+    // 라우터 이벤트
+    this.router.events.subscribe(event => {
+      console.log(event);
+      if (event instanceof NavigationEnd) {
+        if (event.url === '/heroes') {
+          this.selectedHero = null;
+        }
+      }
+    });
+
+    // this.router.events.subscribe(events => {
+    //   // 부모, 자식 경로가 호출될때마다 여러가지 이벤트 발생. NavigationStart -> NavigationReconized -> NavigationEnd
+    //   if (events instanceof NavigationEnd) {
+    //     console.log('nagigation start:' + events.url);
+    //     if (events.url === '/heroes') {
+    //       this.selectedHero = null;
+    //     }
+    //   }
+    // });
 
 
 

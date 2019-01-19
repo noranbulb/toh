@@ -51,6 +51,11 @@ export class HeroDetailComponent implements OnInit {
   //   this.heroService.getHero(+params['hero_id'])
   // }
 
+  // getHero(hero_id: number) {
+  //   this.heroService.getHero(hero_id)
+  //     .subscribe(data => this.hero = data);
+  // }
+
   getHero(hero_id: number) {
     this.heroService.getHero(hero_id)
       .subscribe(data => this.hero = data);
