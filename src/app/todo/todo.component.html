@@ -52,7 +52,7 @@
   <ng-template ngFor let-todo [ngForOf]="todoList"><!--템플릿에선 이렇게 바뀐다.-->
 
 
-    <tr *ngIf="!todo.isEdited"> <!--일반 템플릿-->
+    <tr *ngIf="!todo.isEdited" appHighlight [highlightColor]="'#c8ffff'"> <!--일반 템플릿-->
       <td>{{todo.isFinished}}</td>
       <td [class.todo-finished]="todo.isFinished">{{todo.todo}}</td>
       <td>{{todo.created| mydate: 'aaa'}}</td>

@@ -107,8 +107,6 @@ export class TodoComponent implements OnInit {
     
     if( confirm('삭제하시겠니까?') ) {
 
-
-
         this.heroService.removeTodo( todo.todo_id ).subscribe(data => {
           if ( data.result === 0 ) {
 
