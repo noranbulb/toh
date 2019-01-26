@@ -1,15 +1,39 @@
 
-<div class="row">
-  <div class="col-sm-8">
-    <div class="form-group">
-      <input type="text" class="form-control" placeholder="할일을 입력하세요."
-             [(ngModel)]="newTodo.todo">
+<!--<div class="row">-->
+  <!--<div class="col-sm-8">-->
+    <!--<div class="form-group">-->
+      <!--<input type="text" class="form-control" placeholder="할일을 입력하세요."-->
+             <!--[(ngModel)]="newTodo.todo">-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="col-sm-4">-->
+    <!--<button class="btn btn-primary btn-block" (click)="addTodo()">추가</button>-->
+  <!--</div>-->
+<!--</div>-->
+
+
+<form #myForm="ngForm" (ngSubmit)="addTodo()">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="할일을 입력하세요." [(ngModel)]="newTodo.todo"
+               name="todo" #todo="ngModel" required>
+
+        <!--todo.valid #todo="ngModel" // name="todo"로 접근이고 필수 -->
+        <div [hidden]="!todo.touched || todo.valid" class="alert alert-danger">
+          할인은 필수 필드
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+
+      <!--[disabled]="!myForm.form.valid" // #myForm으로 접근 -->
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="!myForm.form.valid">추가</button>
+
     </div>
   </div>
-  <div class="col-sm-4">
-    <button class="btn btn-primary btn-block" (click)="addTodo()">추가</button>
-  </div>
-</div>
+</form>
+
 
 
 <table class="table table-striped">
@@ -23,15 +47,35 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let todo of todoList">
-    <td>{{todo.isFinished}}</td>
-    <td [class.todo-finished]="todo.isFinished">{{todo.todo}}</td>
-    <td>{{todo.created}}</td>
-    <td>{{todo.updated}}</td>
-    <td>
-      <button class="btn btn-success btn-sm">수정</button>
-      <button class="btn btn-danger btn-sm ml-1">삭제</button>
-    </td>
-  </tr>
+
+  <!--<ng-template *ngFor="let todo of todoList">-->
+  <ng-template ngFor let-todo [ngForOf]="todoList"><!--템플릿에선 이렇게 바뀐다.-->
+
+
+    <tr *ngIf="!todo.isEdited"> <!--일반 템플릿-->
+      <td>{{todo.isFinished}}</td>
+      <td [class.todo-finished]="todo.isFinished">{{todo.todo}}</td>
+      <td>{{todo.created}}</td>
+      <td>{{todo.updated}}</td>
+      <td>
+        <button class="btn btn-success btn-sm" (click)="save(todo)">수정</button>
+        <button class="btn btn-danger btn-sm ml-1">삭제</button>
+      </td>
+    </tr>
+
+    <tr *ngIf="todo.isEdited"> <!--수정 템플릿-->
+      <td><input type="checkbox"   [(ngModel)]="todo.isFinished"></td>
+      <td [class.todo-finished]="todo.isFinished"><input  [(ngModel)]="todo.todo" ></td>
+      <td>{{todo.created}}</td>
+      <td>{{todo.updated}}</td>
+      <td>
+        <button class="btn btn-primary btn-sm" (click)="modify(todo)">저장</button>
+        <button class="btn btn-warning btn-sm ml-1" (click)="restore(todo)">취소</button>
+      </td>
+    </tr>
+
+
+  </ng-template>
+
   </tbody>
 </table>

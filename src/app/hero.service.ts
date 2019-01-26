@@ -65,13 +65,19 @@ export class HeroService {
     return this.http.get<TodoVo[]>(environment.HOST + '/api/todo');
   }
 
-  getTodo( params: any ): Observable<TodoVo>
+  addTodo( params: any ): Observable<TodoVo>
   {
-    const header = new HttpHeaders();
-    //header.append('Content-type', 'application/json');
-    header.append('Content-Type', 'application/json');
+    // const header = new HttpHeaders();
+    // header.append('Content-type', 'application/json'); //앵귤러 버전 4에서는 붙여줘야하는데 버전 업이 되면서 안붙여도 되게 되었다.
+    // return this.http.post<TodoVo>(environment.HOST + '/api/todo', params,{headers: header} );
 
-    return this.http.post<TodoVo>(environment.HOST + '/api/todo', params,{headers: header} );
+    return this.http.post<TodoVo>(environment.HOST + '/api/todo', params );
 
   }
+
+  modifyTodo(params: TodoVo): Observable<TodoVo> {
+    return this.http.put(environment.HOST + '/api/todo', params);
+  }
+
+
 }

@@ -58,7 +58,11 @@ export class JqueryComponent implements OnInit {
 
       $('#todo_list').append(todo);
     });
+
+
   }
+
+
 
   add_todo() {
     $.ajax({
