@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Hero} from '../hero';
-import {HEROES} from '../mock-heroes';
+
 import {HeroService} from '../hero.service';
 import {element} from 'protractor';
 import {NavigationEnd, Router} from '@angular/router';
@@ -11,8 +11,7 @@ import {NavigationEnd, Router} from '@angular/router';
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.scss']
 })
-export class HeroesComponent implements OnInit
-{
+export class HeroesComponent implements OnInit {
 
   //1)리터럴 객체로 객체 생성
 
@@ -21,11 +20,11 @@ export class HeroesComponent implements OnInit
   //   name : 'win'
   // }
 
-  hero : Hero; //형태만
+  hero: Hero; //형태만
   //heroes = HEROES; //목업이고
-  heroes:Hero[];
+  heroes: Hero[];
   //heroes = this.hero;
-  selectedHero:Hero;
+  selectedHero: Hero;
 
   isSpecial = true;
 
@@ -74,30 +73,28 @@ export class HeroesComponent implements OnInit
   // }
 
   //생성자로 이미 등록된 서비스를 주입받는다. (DI)
-  constructor(private heroService : HeroService , private router:Router )
-  {
+  constructor(private heroService: HeroService, private router: Router) {
     //2 ) new 키워드로 객체 생성11
-    this.hero = new Hero(1,'a');
+    this.hero = new Hero(1, 'a');
 
     // this.hero.name = "wind"
-    //console.log(this.hero)
+    // console.log(this.hero)
 
-    //의존적인 코드
-    //const heroService = new HeroService();
-    //this.heroes = heroService.getHeroes();
+    // 의존적인 코드
+    // const heroService = new HeroService();
+    // this.heroes = heroService.getHeroes();
 
     heroService.getHeroes()
-      .subscribe(data => { //subscribe 는 Observable로 가입한다는 뜻
+      .subscribe(data => { // subscribe 는 Observable로 가입한다는 뜻
         this.heroes = data;
       });
 
     //1) 가입 자식 컴포넌트가 변경되었다는것을 알기 위해서 subscripbe
     this.heroService.refresh$
-      .subscribe(data=> {
-        console.log(data)
-        if( this.heroes )
-        {
-          this.selectedHero =  this.heroes.find(item => item.hero_id === data )
+      .subscribe(data => {
+        console.log(data);
+        if (this.heroes) {
+          this.selectedHero = this.heroes.find(item => item.hero_id === data);
         }
       });
 
@@ -131,19 +128,16 @@ export class HeroesComponent implements OnInit
     // });
 
 
-
   }
 
   ngOnInit() {
   }
 
-  onSave(e:any)
-  {
+  onSave(e: any) {
     console.log(e);
   }
 
-  onSelect(hero:Hero)
-  {
+  onSelect(hero: Hero) {
     this.selectedHero = hero;
   }
 
