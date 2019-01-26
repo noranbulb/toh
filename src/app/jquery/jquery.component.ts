@@ -31,7 +31,7 @@ export class JqueryComponent implements OnInit {
         this.todoList = data;
         this.refresh();
 
-        this.bbb = 1;
+
       }
     });
   }
@@ -54,6 +54,8 @@ export class JqueryComponent implements OnInit {
         '<button type="button">삭제</button>' +
         '</td>' +
         '</tr>';
+
+
       $('#todo_list').append(todo);
     });
   }

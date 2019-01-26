@@ -7,6 +7,7 @@ import {Hero} from './hero';
 import {element} from 'protractor';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
+import {TodoVo} from './domain/todo.vo';
 
 
 @Injectable({
@@ -58,4 +59,9 @@ export class HeroService {
   //   // es6 template string : `${자바스크립트변수}`
   //   return this.http.get<Hero>(`${environment.HOST}/api/hero/${hero_id}`);
   // }
+
+  getTodoList()
+  {
+    return this.http.get<TodoVo[]>(environment.HOST + '/api/todo');
+  }
 }
