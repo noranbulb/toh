@@ -101,6 +101,36 @@ export class TodoComponent implements OnInit {
 
   }
 
+  remove(todo: TodoVo)
+  {
+    console.log(222 , todo);
+    
+    if( confirm('삭제하시겠니까?') ) {
+
+
+
+        this.heroService.removeTodo( todo.todo_id ).subscribe(data => {
+          if ( data.result === 0 ) {
+
+            // 데이터에서 삭제
+            // 1) index 찾기
+            const index = this.todoList.findIndex(item => item.todo_id === todo.todo_id);
+
+            // 2) splice 로 삭제하기
+            this.todoList.splice(index, 1);
+
+            // 삭제 메시지 보여주기
+
+            // let index = this.todoList.findIndex(data => {
+            //   return todo.todo_id === data.todo_id ? true : false;
+            // });
+            // this.todoList.splice(index, 1);
+          }
+        });
+
+    }
+  }
+
 
 
 }
