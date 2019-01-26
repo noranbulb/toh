@@ -55,8 +55,9 @@
     <tr *ngIf="!todo.isEdited"> <!--일반 템플릿-->
       <td>{{todo.isFinished}}</td>
       <td [class.todo-finished]="todo.isFinished">{{todo.todo}}</td>
-      <td>{{todo.created| mydate}}</td>
-      <td>{{todo.updated}}</td>
+      <td>{{todo.created| mydate: 'aaa'}}</td>
+      <td>{{todo.updated | date: 'yyyy-MM-dd a HH:mm'}}</td> <!--리액트에는 없다 뷰는 필터에 있고-->
+
       <td>
         <button class="btn btn-success btn-sm" (click)="save(todo)">수정</button>
         <button class="btn btn-danger btn-sm ml-1" (click)="remove(todo)">삭제</button>
