@@ -16,6 +16,9 @@ export class TodoComponent implements OnInit {
   // 5.뷰 바인딩
 
   todoList: TodoVo[];
+  //newTodo: TodoVo; // 할일 추가하기 위한 모델
+
+  newTodo = new TodoVo(); // 할일 추가하기 위한 모델
   
   //di를 주입 받다
   constructor(private  heroService: HeroService ) { }

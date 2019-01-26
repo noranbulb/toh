@@ -5,7 +5,7 @@ import {Observable, of, Subject} from 'rxjs';
 import {delay} from 'rxjs/operators';
 import {Hero} from './hero';
 import {element} from 'protractor';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {TodoVo} from './domain/todo.vo';
 
@@ -63,5 +63,15 @@ export class HeroService {
   getTodoList()
   {
     return this.http.get<TodoVo[]>(environment.HOST + '/api/todo');
+  }
+
+  getTodo( params: any ): Observable<TodoVo>
+  {
+    const header = new HttpHeaders();
+    //header.append('Content-type', 'application/json');
+    header.append('Content-Type', 'application/json');
+
+    return this.http.post<TodoVo>(environment.HOST + '/api/todo', params,{headers: header} );
+
   }
 }
