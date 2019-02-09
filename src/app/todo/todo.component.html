@@ -81,5 +81,11 @@
   </tbody>
 </table>
 
+<ngb-pagination class="d-flex justify-content-center"
+  [maxSize]="5"
+  [(page)]="pageVo.pageIndex"
+  [pageSize]="pageVo.pageSize"
+  [collectionSize]="pageVo.totalCount" (pageChange)="pageRefresh()"></ngb-pagination>
+
 
 

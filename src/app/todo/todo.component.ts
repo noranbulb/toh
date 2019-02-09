@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TodoVo} from '../domain/todo.vo';
 import {HeroService} from '../hero.service';
+import {PageVo} from '../domain/page.vo';
 
 @Component({
   selector: 'app-todo',
@@ -22,6 +23,8 @@ export class TodoComponent implements OnInit {
 
   tempMap = new Map<number, TodoVo>();
 
+  pageVo = new PageVo();
+
   
   // di를 주입 받다 ;
 
@@ -29,13 +32,38 @@ export class TodoComponent implements OnInit {
 
   ngOnInit() {
 
-    this.heroService.getTodoList()
+    this.getTodoList();
+    
+  }
+
+  getTodoList()
+  {
+
+    /*this.heroService.getTodoList()
       .subscribe(data => {
         console.log('getTodoList', data);
         this.todoList = data;
+      });*/
+
+
+    const start_index = (this.pageVo.pageIndex - 1) * this.pageVo.pageSize;
+
+    console.log('start_index ' , start_index)
+
+    this.heroService.getPagedTodoList(start_index , this.pageVo.pageSize)
+      .subscribe(body => {
+        this.todoList = body.data;
+        this.pageVo.totalCount = body.total;
+
       });
 
-    
+
+  }
+
+  pageRefresh() {
+
+    this.getTodoList();
+
   }
 
   // getTodoList() {

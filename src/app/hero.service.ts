@@ -64,6 +64,11 @@ export class HeroService {
     return this.http.get<TodoVo[]>(environment.HOST + '/api/todo');
   }
 
+  getPagedTodoList(start_index: number, page_size: number): Observable<ResultVo> {
+    return this.http.get<ResultVo>(environment.HOST +
+      `/api/paged_todo?start_index=${start_index}&page_size=${page_size}`);
+  }
+
   addTodo( params: any ): Observable<TodoVo>
   {
     // const header = new HttpHeaders();
@@ -75,7 +80,7 @@ export class HeroService {
   }
 
   modifyTodo(params: TodoVo): Observable<TodoVo> {
-    return this.http.put(environment.HOST + '/api/todo', params);
+    return this.http.put<TodoVo>(environment.HOST + '/api/todo', params);
   }
 
   removeTodo(todo_id: number): Observable<ResultVo> {
